@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form span {
+            color: red;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="std-form">
+        <fieldset>
+            <legend>Student Form</legend>
+            <table>
+                <tr>
+                    <td><label>Name:</label></td>
+                    <td><input type="text" id="name" name="name">
+                        <span id="nameError">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Email:</label></td>
+                    <td><input type="email" id="email" name="email"></td>
+                </tr>
+                <tr>
+                    <td><label>Mobile:</label></td>
+                    <td><input type="number" id="mobile" name="mobile"></td>
+                </tr>
+                <tr>
+                    <td><label>Gender:</label></td>
+                    <td>
+                        <input type="radio" id="male" name="gender" value="male">Male
+                        <input type="radio" id="female" name="gender" value="female">Female
+                        <input type="radio" id="others" name="gender" value="others">others
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Password:</label></td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td><label>Con-Pass:</label></td>
+                    <td><input type="password" id="con-password" name="conpass"></td>
+                </tr>
+                <tr>
+                    <td><button>Submit</button></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+    <script>
+        let form = document.getElementById("std-form")
+        let formDetails = {}
+
+        form.addEventListener("input", (event) => {
+            let name = event.target.name
+            let value = event.target.value
+            formDetails[name] = value
+        })
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            let { name, email, mobile, gender, password, conpass } = formDetails
+            if (!name || !email || !mobile || !gender || !password || !conpass) {
+                alert("provide all the details before submition")
+            }
+            else if (name.length < 4) {
+                document.getElementById("nameError").innerHTML = "* provide atleast 4 chars"
+            }
+            else if (password != conpass) {
+                alert("password are not matching")
+            }
+            else {
+                console.log("form submitted");
+            }
+        })
+    </script>
+</body>
+
+</html>
